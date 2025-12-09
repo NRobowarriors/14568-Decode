@@ -4,6 +4,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.har
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
@@ -24,8 +25,8 @@ public class redWall extends LinearOpMode {
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
     private final Pose startPose = new Pose(120, 128, Math.toRadians(35)); // Start Pose of our robot.
-    private final Pose endPose = new Pose(108, 60, Math.toRadians(180));
-    private final Pose scorePose = new Pose(90, 96, Math.toRadians(35)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
+    private final Pose endPose = new Pose(90, 120, Math.toRadians(90));
+    private final Pose scorePose = new Pose(78, 80, Math.toRadians(45)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
     private final Pose pickup1Pose = new Pose(37, 121, Math.toRadians(0)); // Highest (First Set) of Artifacts from the Spike Mark.
     private final Pose pickup2Pose = new Pose(43, 130, Math.toRadians(0)); // Middle (Second Set) of Artifacts from the Spike Mark.
     private final Pose pickup3Pose = new Pose(49, 135, Math.toRadians(0)); // Lowest (Third Set) of Artifacts from the Spike Mark.
@@ -45,16 +46,16 @@ public class redWall extends LinearOpMode {
         redWall = new Path(new BezierLine(startPose, scorePose));
         redWall.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
         redWall.setTranslationalConstraint(5);
-        redWall.setHeadingConstraint(0.9);
+        redWall.setHeadingConstraint(0.8);
         redWall.setTimeoutConstraint(100);
-        redWall.setTValueConstraint(0.9);
-        redWall.setVelocityConstraint(0.9);
+        redWall.setTValueConstraint(0.8);
+        redWall.setVelocityConstraint(0.8);
 
 
 
 
         moveOffLine = follower.pathBuilder()
-                .addPath(new BezierLine(scorePose, endPose))
+                .addPath(new BezierCurve(scorePose, endPose))
                 .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading())
                 .build();
 
@@ -146,7 +147,7 @@ public class redWall extends LinearOpMode {
 
         shooterVelocity(3500);
         sleep(3000);
-        runFeed(-1, 1);
+        runFeed(-1, 0.5);
         sleep(1000);
         shootCycle();
         shootCycle();
@@ -172,7 +173,7 @@ public class redWall extends LinearOpMode {
         sleep(500);
     }
 
-    private void runFeed(int feedPower, int intakePower) {
+    private void runFeed(int feedPower, double intakePower) {
         transfer1.setPower(feedPower);
         transfer2.setPower(feedPower);
         transfer3.setPower(feedPower);
