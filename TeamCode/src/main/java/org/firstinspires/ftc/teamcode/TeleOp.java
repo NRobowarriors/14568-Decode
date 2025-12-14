@@ -151,9 +151,9 @@ public class TeleOp extends OpMode {
         }
 
         if (gamepad2.right_bumper) {
-            intakeMotor.setPower(1);
+            intakeMotor.setPower(0.5);
         } else if (gamepad2.b) {
-            intakeMotor.setPower(-1);
+            intakeMotor.setPower(0.5);
         } else {
             intakeMotor.setPower(0);
         }

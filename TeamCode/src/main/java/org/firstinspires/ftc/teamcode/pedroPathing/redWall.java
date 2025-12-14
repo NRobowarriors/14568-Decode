@@ -46,10 +46,10 @@ public class redWall extends LinearOpMode {
         redWall = new Path(new BezierLine(startPose, scorePose));
         redWall.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
         redWall.setTranslationalConstraint(5);
-        redWall.setHeadingConstraint(0.8);
+        redWall.setHeadingConstraint(0.9);
         redWall.setTimeoutConstraint(100);
-        redWall.setTValueConstraint(0.8);
-        redWall.setVelocityConstraint(0.8);
+        redWall.setTValueConstraint(0.99);
+        redWall.setVelocityConstraint(0.9);
 
 
 
