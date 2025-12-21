@@ -36,7 +36,7 @@ public class BlueWall extends LinearOpMode {
     private CRServo transfer1, transfer2, transfer3;
     private Servo fireServo;
     private Path blueWall;
-    private PathChain  moveOffLine;
+    private PathChain  moveOffLine, pickUp1;
 
 
 
@@ -47,25 +47,22 @@ public class BlueWall extends LinearOpMode {
         blueWall = new Path(new BezierLine(startPose, scorePose));
         blueWall.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
         blueWall.setTranslationalConstraint(5);
-        blueWall.setHeadingConstraint(0.8);
+        blueWall.setHeadingConstraint(0.9);
         blueWall.setTimeoutConstraint(100);
-        blueWall.setTValueConstraint(0.8);
-        blueWall.setVelocityConstraint(0.8);
-
-
-
+        blueWall.setTValueConstraint(0.99);
+        blueWall.setVelocityConstraint(0.9);
 
         moveOffLine = follower.pathBuilder()
                 .addPath(new BezierCurve(scorePose, endPose))
                 .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading(), 0.8)
                 .build();
 
-     /*   scorePickup1 = follower.pathBuilder()//only drives rn no shoot yet
-                .addPath(new BezierLine(pickup1Pose, scorePose))
+        pickUp1 = follower.pathBuilder()
+                .addPath(new BezierLine(scorePose, pickup1Pose))
                 .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
                 .build();
 
-        grabPickup2 = follower.pathBuilder()
+     /*   grabPickup2 = follower.pathBuilder()
                 .addPath(new BezierLine(pickup2Pose, scorePose))
                 .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
                 .build();
@@ -146,11 +143,15 @@ public class BlueWall extends LinearOpMode {
         }
 
         shooterVelocity(3500);
-        sleep(3000);
-        runFeed(-1, 0.5);
+        sleep(2000);
+        shootCycle();
+        sleep(1000);
+        runFeed(-1, 1);
         sleep(1000);
         shootCycle();
+        sleep(300);
         shootCycle();
+        sleep(300);
         shootCycle();
         shooterVelocity(0);
         runFeed(0, 0);

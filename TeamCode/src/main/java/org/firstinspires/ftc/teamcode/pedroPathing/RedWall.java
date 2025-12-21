@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
-
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
@@ -12,15 +9,14 @@ import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "redWall")
-public class redWall extends LinearOpMode {
+@Autonomous(name = "RedWall")
+public class RedWall extends LinearOpMode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
@@ -146,11 +142,15 @@ public class redWall extends LinearOpMode {
         }
 
         shooterVelocity(3500);
-        sleep(3000);
-        runFeed(-1, 0.5);
+        sleep(2000);
+        shootCycle();
+        sleep(1000);
+        runFeed(-1, 1);
         sleep(1000);
         shootCycle();
+        sleep(300);
         shootCycle();
+        sleep(300);
         shootCycle();
         shooterVelocity(0);
         runFeed(0, 0);

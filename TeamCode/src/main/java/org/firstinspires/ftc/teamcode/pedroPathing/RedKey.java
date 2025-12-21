@@ -4,6 +4,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.har
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
@@ -23,68 +24,10 @@ public class RedKey extends LinearOpMode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
-
-    private final Pose startPose = new Pose(84, 9, Math.toRadians(90)); // Start Pose of our robot.
-    private final Pose endPose = new Pose(84, 40, Math.toRadians(90));
-    private final Pose scorePose = new Pose(84, 9, Math.toRadians(70)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
-    private final Pose pickup1Pose = new Pose(37, 121, Math.toRadians(0)); // Highest (First Set) of Artifacts from the Spike Mark.
-    private final Pose pickup2Pose = new Pose(43, 130, Math.toRadians(0)); // Middle (Second Set) of Artifacts from the Spike Mark.
-    private final Pose pickup3Pose = new Pose(49, 135, Math.toRadians(0)); // Lowest (Third Set) of Artifacts from the Spike Mark.
-
     private DcMotorEx intakeMotor, firearmMotor, firearmMotor1;
     private CRServo transfer1, transfer2, transfer3;
     private Servo fireServo;
-    private Path RedKey;
-    private PathChain  moveOffLine;
-
-
-
-
-    public void buildPaths() {
-
-
-        RedKey = new Path(new BezierLine(startPose, scorePose));
-        RedKey.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
-        RedKey.setTranslationalConstraint(5);
-        RedKey.setHeadingConstraint(0.9);
-        RedKey.setTimeoutConstraint(100);
-        RedKey.setTValueConstraint(0.9);
-        RedKey.setVelocityConstraint(0.9);
-
-
-        RedKey = new Path(new BezierLine(startPose, endPose));
-        RedKey.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
-
-        //    moveOffLine = follower.pathBuilder()
-        //   .addPath(new BezierLine(scorePose, endPose))
-        // .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading())
-        // .build();
-
-     /*   scorePickup1 = follower.pathBuilder()//only drives rn no shoot yet
-                .addPath(new BezierLine(pickup1Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-        grabPickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup2Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-        scorePickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup2Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-        grabPickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(scorePose, pickup3Pose))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup3Pose.getHeading())
-                .build();
-
-        scorePickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup3Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup3Pose.getHeading(), scorePose.getHeading())
-        */       // .build();
-    }
+    private Poses poses;
 
     public void runOpMode()
     {
@@ -99,7 +42,6 @@ public class RedKey extends LinearOpMode {
         transfer1.setDirection(DcMotorSimple.Direction.FORWARD);
         transfer2.setDirection(DcMotorSimple.Direction.REVERSE);
         transfer3.setDirection(DcMotorSimple.Direction.REVERSE);
-
 
         firearmMotor = hardwareMap.get(DcMotorEx.class, "firearmMotor");
         firearmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -116,42 +58,44 @@ public class RedKey extends LinearOpMode {
 
 
         firearmMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        firearmMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        firearmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         telemetry.addData("Status", "Initialized");
 
         follower = Constants.createFollower(hardwareMap);
-        buildPaths();
-        follower.setStartingPose(startPose);
+        poses = new Poses(AutoEnum.RedKey, follower);
 
         waitForStart();
 
-        follower.followPath(RedKey, true);
+        while(opModeIsActive()){
+            drive();
+            shoot();
+        }
+
+
+        follower.followPath(poses.startingPath, true);
+
         while (follower.isBusy()) {
-            follower.followPath(RedKey, true);
             follower.update();
             telemetry.addLine("Still in Loop");
-            telemetry.addData("Distance Remaining", RedKey.getDistanceRemaining());
-            telemetry.addData("Distance Traveled", RedKey.getDistanceTraveled());
-            telemetry.addData("End Heading Constraint", RedKey.getPathEndHeadingConstraint());
-            telemetry.addData("End Timeout Constraint", RedKey.getPathEndTimeoutConstraint());
-            telemetry.addData("End TValue Constraint", RedKey.getPathEndTValueConstraint());
-            telemetry.addData("End Translational Constraint", RedKey.getPathEndTranslationalConstraint());
-            telemetry.addData("Plan Completion", RedKey.getPathCompletion());
             telemetry.addData("Is Busy", follower.isBusy());
             telemetry.addData("Plan Completion", follower.getHeadingError());
             telemetry.addData("Plan Completion", follower.getTranslationalError());
             telemetry.addLine("Out of Loop");
             telemetry.update();
-
-
         }
 
         shooterVelocity(4750);
-        sleep(3000);
+        sleep(2000);
+        shootCycle();
+        sleep(1000);
         runFeed(-1, 1);
         sleep(1000);
         shootCycle();
+        sleep(300);
         shootCycle();
+        sleep(300);
         shootCycle();
         shooterVelocity(0);
         runFeed(0, 0);
@@ -163,6 +107,10 @@ public class RedKey extends LinearOpMode {
             follower.update();
         }
 
+    }
+    private void drive(){
+    }
+    private void shoot(){
     }
     private void shooterVelocity(int wantedVelocity) {
         firearmMotor.setVelocity(calcVelocity(wantedVelocity));

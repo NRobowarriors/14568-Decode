@@ -35,7 +35,7 @@ public class BlueKey extends LinearOpMode {
     private CRServo transfer1, transfer2, transfer3;
     private Servo fireServo;
     private Path blueKey;
-    private PathChain  moveOffLine;
+    private PathChain  moveOffLine, pickUp1;
 
 
 
@@ -52,17 +52,17 @@ public class BlueKey extends LinearOpMode {
         blueKey.setVelocityConstraint(0.9);
 
 
-      //  blueKey = new Path(new BezierLine(scorePose, endPose));
-      //  blueKey.setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading());
+
 
         moveOffLine = follower.pathBuilder()
                 .addPath(new BezierLine(scorePose, endPose))
                 .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading(), 0.8)
                 .build();
-    //    moveOffLine = follower.pathBuilder()
-             //   .addPath(new BezierLine(scorePose, endPose))
-               // .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading())
-               // .build();
+
+      pickUp1 = follower.pathBuilder()
+               .addPath(new BezierLine(scorePose, endPose))
+               .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading())
+                .build();
 
      /*   scorePickup1 = follower.pathBuilder()//only drives rn no shoot yet
                 .addPath(new BezierLine(pickup1Pose, scorePose))
@@ -148,11 +148,15 @@ public class BlueKey extends LinearOpMode {
         }
 
         shooterVelocity(4750);
-        sleep(3000);
+        sleep(2000);
+        shootCycle();
+        sleep(1000);
         runFeed(-1, 1);
         sleep(1000);
         shootCycle();
+        sleep(300);
         shootCycle();
+        sleep(300);
         shootCycle();
         shooterVelocity(0);
         runFeed(0, 0);
