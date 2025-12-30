@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
+import static org.firstinspires.ftc.teamcode.pedroPathing.ShootEnum.Shooting;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
@@ -18,6 +19,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "RedKey")
 public class RedKey extends LinearOpMode {
@@ -28,6 +30,11 @@ public class RedKey extends LinearOpMode {
     private CRServo transfer1, transfer2, transfer3;
     private Servo fireServo;
     private Poses poses;
+    private ShootEnum shootingState;
+    private DriveEnum driveState;
+    private boolean firstPath = true;
+    private int driveIndex = 0;
+    private ElapsedTime shootingTimer;
 
     public void runOpMode()
     {
@@ -109,8 +116,63 @@ public class RedKey extends LinearOpMode {
 
     }
     private void drive(){
+        switch(driveState){
+            case Waiting:
+                break;
+            case StartDriving:
+                if (firstPath) follower.followPath(poses.startingPath);
+                else {
+                    follower.followPath(poses.PathChains[driveIndex]);
+                    driveIndex++;
+                }
+                follower.update();
+                driveState = DriveEnum.IsDriving;
+                break;
+            case IsDriving:
+                if (!follower.isBusy()) {
+                    driveState = DriveEnum.Waiting;
+                    shootingState = Shooting;
+                }
+                else {
+                    follower.update();
+                }
+                break;
+
+
+        }
     }
     private void shoot(){
+        switch (shootingState){
+            case Waiting:
+                break;
+            case Shooting:
+               firearmMotor.setVelocity(calcVelocity(4750));
+               firearmMotor1.setVelocity(calcVelocity(4750));
+               transfer1.setPower(1);
+               transfer2.setPower(1);
+               transfer3.setPower(1);
+               shootingState = ShootEnum.FlickerTimer;
+               shootingTimer.reset();
+               break;
+            case FlickerTimer:
+                if (shootingTimer.seconds() > 1) {
+                    shootingState = ShootEnum.Flicker;
+                }
+                break;
+            case Flicker:
+                fireServo.setPosition(0.5);
+                shootingTimer.reset();
+                shootingState = ShootEnum.FlickerTimer;
+                break;
+            case FlickerReturn:
+                if (shootingTimer.seconds() > 0.2) {
+                    shootingState = ShootEnum.Waiting;
+                    fireServo.setPosition(0);
+                }
+
+
+
+        }
     }
     private void shooterVelocity(int wantedVelocity) {
         firearmMotor.setVelocity(calcVelocity(wantedVelocity));
