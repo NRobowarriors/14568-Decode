@@ -19,18 +19,18 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-//@Autonomous(name = "RedKey")
-//public class RedKey extends AllAutoCode{
-////    public void runOpMode(){
-////        //poses = new Poses(AutoEnum.BlueKey, follower);
-////        //waitForStart();
-////
-////    }
-//    private void drive(){
-//
-//    }
-//
-//}
+@Autonomous(name = "RedKey")
+
+public class RedKey extends LinearOpMode{
+
+    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey, hardwareMap, this, telemetry);
+
+    @Override
+    public void runOpMode() {
+        paths.runOpMode();
+    }
+}

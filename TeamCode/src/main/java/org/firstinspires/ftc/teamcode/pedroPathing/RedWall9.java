@@ -3,14 +3,15 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "BlueWall")
+@Autonomous(name = "RedWall9")
 
-public class BlueWall extends LinearOpMode {
+public class RedWall9 extends LinearOpMode {
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.BlueWall, hardwareMap, this, telemetry);
+    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedWall9, hardwareMap, this, telemetry);
 
     @Override
     public void runOpMode() {
         paths.runOpMode();
     }
 }
+

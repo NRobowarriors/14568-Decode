@@ -6,11 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.pedroPathing.AllAutoCode;
 import org.firstinspires.ftc.teamcode.pedroPathing.AutoEnum;
 
-@Autonomous(name = "BlueKey")
+@Autonomous(name = "RedKey3")
 
-public class BlueKey extends LinearOpMode {
+public class RedKey3 extends LinearOpMode {
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.BlueKey, hardwareMap, this, telemetry);
+    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey3, hardwareMap, this, telemetry);
 
     @Override
     public void runOpMode() {

@@ -7,6 +7,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -15,7 +16,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class AllAutoCode extends LinearOpMode {
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public class AllAutoCode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
@@ -29,11 +32,14 @@ public class AllAutoCode extends LinearOpMode {
     private int driveIndex = 0;
     private ElapsedTime shootingTimer;
     HardwareMap hardwareMap;
-    public AllAutoCode (HardwareMap hardwareMap) {
-        this.hardwareMap = hardwareMap;
-    }
+    LinearOpMode linearOpMode;
+    Telemetry telemetry;
 
-    public AllAutoCode () {}
+    public AllAutoCode (AutoEnum autoEnum, HardwareMap hardwareMap, LinearOpMode linearOpMode, Telemetry telemetry) {
+        this.hardwareMap = hardwareMap;
+        this.linearOpMode = linearOpMode;
+        this.telemetry = telemetry;
+    }
 
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -69,11 +75,11 @@ public class AllAutoCode extends LinearOpMode {
     follower = Constants.createFollower(hardwareMap);
     driveState = DriveEnum.StartDriving;
     shootingState = ShootEnum.Waiting;
-    waitForStart();
+    linearOpMode.waitForStart();
     shootingTimer = new ElapsedTime();
         fireServo.setPosition(0.5);
 
-        while(opModeIsActive() && !isStopRequested()){
+        while(linearOpMode.opModeIsActive() && !linearOpMode.isStopRequested()){
         drive();
         shoot();
         telemetry.addLine("Still in Loop");
