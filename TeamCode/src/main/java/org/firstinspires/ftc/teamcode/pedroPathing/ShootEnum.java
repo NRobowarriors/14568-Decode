@@ -6,5 +6,6 @@ public enum ShootEnum {
     FlickerTimer,
     Flicker,
     FlickerReturn,
+    SpinUp,
     Intake
 }

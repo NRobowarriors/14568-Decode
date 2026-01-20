@@ -117,6 +117,7 @@ public class TeleOp extends OpMode {
         firearmMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         telemetry.addData("Status", "Initialized");
+        fireServo.setPosition(0.5);
     }
 
 
@@ -135,16 +136,17 @@ public class TeleOp extends OpMode {
     public void loop() {
 
         if (gamepad2.left_bumper) {
-            firearmMotor.setVelocity(calcVelocity(4000));
-            firearmMotor1.setVelocity(calcVelocity(4000));
+            firearmMotor.setVelocity(calcVelocity(3750));
+            firearmMotor1.setVelocity(calcVelocity(3750));
         }
         else if (gamepad2.x) {
-                firearmMotor.setVelocity(calcVelocity(4750));
-                firearmMotor1.setVelocity(calcVelocity(4750));
+                firearmMotor.setVelocity(calcVelocity(4400));
+                firearmMotor1.setVelocity(calcVelocity(4400));
         }
-        else if (gamepad2.dpad_right){
-            firearmMotor.setVelocity(calcVelocity(5000));
-            firearmMotor1.setVelocity(calcVelocity(5000));
+        else if (gamepad2.left_trigger > 0.25){
+            firearmMotor.setVelocity(calcVelocity(4250));
+            firearmMotor1.setVelocity(calcVelocity(4250));
+
         }  else {
                 firearmMotor.setVelocity(calcVelocity(0));
                 firearmMotor1.setVelocity(calcVelocity(0));
@@ -160,7 +162,7 @@ public class TeleOp extends OpMode {
         if(gamepad2.left_stick_y < -0.25)
         {
             isFiringTheServo = true;
-            fireServo.setPosition(0);
+            fireServo.setPosition(0.1);
             fireServoTimer.reset();
         }
         if(isFiringTheServo && fireServoTimer.seconds() > 0.5)

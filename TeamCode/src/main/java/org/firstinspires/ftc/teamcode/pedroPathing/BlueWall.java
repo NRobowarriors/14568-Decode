@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
+import static org.firstinspires.ftc.teamcode.pedroPathing.ShootEnum.Shooting;
 
 import com.pedropathing.follower.Follower;
-import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
@@ -18,70 +18,25 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Bluewall")
+@Autonomous(name = "BlueWall")
 public class BlueWall extends LinearOpMode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
-
-    private final Pose startPose = new Pose(18, 128, Math.toRadians(145)); // Start Pose of our robot.
-    private final Pose endPose = new Pose(40, 130, Math.toRadians(90));
-    private final Pose scorePose = new Pose(60, 80, Math.toRadians(135)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
-    private final Pose pickup1Pose = new Pose(37, 121, Math.toRadians(0)); // Highest (First Set) of Artifacts from the Spike Mark.
-    private final Pose pickup2Pose = new Pose(43, 130, Math.toRadians(0)); // Middle (Second Set) of Artifacts from the Spike Mark.
-    private final Pose pickup3Pose = new Pose(49, 135, Math.toRadians(0)); // Lowest (Third Set) of Artifacts from the Spike Mark.
-
     private DcMotorEx intakeMotor, firearmMotor, firearmMotor1;
     private CRServo transfer1, transfer2, transfer3;
     private Servo fireServo;
-    private Path blueWall;
-    private PathChain  moveOffLine, pickUp1;
+    private Poses poses;
+    private ShootEnum shootingState;
+    private DriveEnum driveState;
+    private boolean firstPath = true;
+    private int driveIndex = 0;
+    private ElapsedTime shootingTimer;
 
 
 
-
-    public void buildPaths() {
-
-
-        blueWall = new Path(new BezierLine(startPose, scorePose));
-        blueWall.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
-        blueWall.setTranslationalConstraint(5);
-        blueWall.setHeadingConstraint(0.9);
-        blueWall.setTimeoutConstraint(100);
-        blueWall.setTValueConstraint(0.99);
-        blueWall.setVelocityConstraint(0.9);
-
-        moveOffLine = follower.pathBuilder()
-                .addPath(new BezierCurve(scorePose, endPose))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), endPose.getHeading(), 0.8)
-                .build();
-
-        pickUp1 = follower.pathBuilder()
-                .addPath(new BezierLine(scorePose, pickup1Pose))
-                .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-     /*   grabPickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup2Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-        scorePickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup2Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
-                .build();
-
-        grabPickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(scorePose, pickup3Pose))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup3Pose.getHeading())
-                .build();
-
-        scorePickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(pickup3Pose, scorePose))
-                .setLinearHeadingInterpolation(pickup3Pose.getHeading(), scorePose.getHeading())
-        */       // .build();
-    }
 
     public void runOpMode()
     {
@@ -93,9 +48,9 @@ public class BlueWall extends LinearOpMode {
         transfer2 = hardwareMap.get(CRServo.class, "transfer2");
         transfer3 = hardwareMap.get(CRServo.class, "transfer3");
         fireServo = hardwareMap.get(Servo.class, "FireServo");
-        transfer1.setDirection(DcMotorSimple.Direction.FORWARD);
-        transfer2.setDirection(DcMotorSimple.Direction.REVERSE);
-        transfer3.setDirection(DcMotorSimple.Direction.REVERSE);
+        transfer1.setDirection(DcMotorSimple.Direction.REVERSE);
+        transfer2.setDirection(DcMotorSimple.Direction.FORWARD);
+        transfer3.setDirection(DcMotorSimple.Direction.FORWARD);
 
         firearmMotor = hardwareMap.get(DcMotorEx.class, "firearmMotor");
         firearmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -110,7 +65,6 @@ public class BlueWall extends LinearOpMode {
         intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
         firearmMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         firearmMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         firearmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -118,23 +72,17 @@ public class BlueWall extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
 
         follower = Constants.createFollower(hardwareMap);
-        buildPaths();
-        follower.setStartingPose(startPose);
-
+        poses = new Poses(AutoEnum.BlueWall, follower);
+        driveState = DriveEnum.StartDriving;
+        shootingState = ShootEnum.Waiting;
         waitForStart();
+        shootingTimer = new ElapsedTime();
+        fireServo.setPosition(0.5);
 
-        follower.followPath(blueWall, true);
-        while (follower.isBusy()) {
-            follower.followPath(blueWall, true);
-            follower.update();
+        while(opModeIsActive() && !isStopRequested()){
+            drive();
+            shoot();
             telemetry.addLine("Still in Loop");
-            telemetry.addData("Distance Remaining", blueWall.getDistanceRemaining());
-            telemetry.addData("Distance Traveled", blueWall.getDistanceTraveled());
-            telemetry.addData("End Heading Constraint", blueWall.getPathEndHeadingConstraint());
-            telemetry.addData("End Timeout Constraint", blueWall.getPathEndTimeoutConstraint());
-            telemetry.addData("End TValue Constraint", blueWall.getPathEndTValueConstraint());
-            telemetry.addData("End Translational Constraint", blueWall.getPathEndTranslationalConstraint());
-            telemetry.addData("Plan Completion", blueWall.getPathCompletion());
             telemetry.addData("Is Busy", follower.isBusy());
             telemetry.addData("Plan Completion", follower.getHeadingError());
             telemetry.addData("Plan Completion", follower.getTranslationalError());
@@ -142,27 +90,93 @@ public class BlueWall extends LinearOpMode {
             telemetry.update();
         }
 
-        shooterVelocity(3500);
-        sleep(2000);
-        shootCycle();
-        sleep(1000);
-        runFeed(-1, 1);
-        sleep(1000);
-        shootCycle();
-        sleep(300);
-        shootCycle();
-        sleep(300);
-        shootCycle();
-        shooterVelocity(0);
-        runFeed(0, 0);
-
-        do {
-            follower.followPath(moveOffLine, true);
-            follower.update();
-        }
-        while (follower.isBusy());
     }
+    private void drive(){
+        switch(driveState){
+            case Waiting:
+                break;
+            case StartDriving:
+                if (firstPath) {
+                    follower.followPath(poses.pathPlus[driveIndex].path);
+                    firstPath = false;
+                }
+                else {
+                    follower.followPath(poses.pathPlus[driveIndex].pathChain);
+                }
+                follower.update();
+                intakeMotor.setPower(1);
+                driveState = DriveEnum.IsDriving;
+                break;
+            case IsDriving:
+                if (!follower.isBusy()) {
+                    if (poses.pathPlus[driveIndex].continueDriving) {
+                        if (driveIndex == poses.pathPlus.length-1){
+                            driveState = DriveEnum.Waiting;
+                        }
+                        else {
+                            driveState = DriveEnum.StartDriving;
+                        }
+                    }
+                    else {
+                        driveState = DriveEnum.Waiting;
+                        shootingState = Shooting;
+                    }
+                    driveIndex++;
+                }
+                else {
+                    follower.update();
+                }
+                break;
 
+
+        }
+    }
+    private void shoot(){
+        switch (shootingState){
+            case Waiting:
+                break;
+            case Shooting:
+                firearmMotor.setVelocity(calcVelocity(4000));
+                firearmMotor1.setVelocity(calcVelocity(4000));
+                shootingState = ShootEnum.SpinUp;
+                shootingTimer.reset();
+                break;
+            case SpinUp:
+                if (shootingTimer.seconds() > 0.4){
+                    transfer1.setPower(1);
+                    transfer2.setPower(1);
+                    transfer3.setPower(1);
+                    shootingState = ShootEnum.FlickerTimer;
+                    shootingTimer.reset();
+                }
+                break;
+            case FlickerTimer:
+                if (shootingTimer.seconds() > 2.1) {
+                    shootingState = ShootEnum.Flicker;
+                }
+                break;
+            case Flicker:
+                fireServo.setPosition(0.1);
+                shootingTimer.reset();
+                shootingState = ShootEnum.FlickerReturn;
+                break;
+            case FlickerReturn:
+                if (shootingTimer.seconds() > 0.5) {
+                    firearmMotor.setVelocity(calcVelocity(0));
+                    firearmMotor1.setVelocity(calcVelocity(0));
+                    transfer1.setPower(0);
+                    transfer2.setPower(0);
+                    transfer3.setPower(0);
+                    fireServo.setPosition(0.5);
+                    shootingState = ShootEnum.Waiting;
+                    driveState = DriveEnum.StartDriving;
+                }
+                break;
+
+
+
+        }
+    }
     private void shooterVelocity(int wantedVelocity) {
         firearmMotor.setVelocity(calcVelocity(wantedVelocity));
         firearmMotor1.setVelocity(calcVelocity(wantedVelocity));
@@ -175,15 +189,13 @@ public class BlueWall extends LinearOpMode {
         sleep(500);
     }
 
-    private void runFeed(int feedPower, double intakePower) {
+    private void runFeed(int feedPower, int intakePower) {
         transfer1.setPower(feedPower);
         transfer2.setPower(feedPower);
         transfer3.setPower(feedPower);
         intakeMotor.setPower(intakePower);
     }
-
     public double calcVelocity(double wantedVelocity){
         return (wantedVelocity * 28) / 60;
     }
 }
-
