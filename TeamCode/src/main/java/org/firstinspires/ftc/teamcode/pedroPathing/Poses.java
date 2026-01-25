@@ -16,7 +16,7 @@ public class Poses {
             case BlueWall3:
                 createPaths(BlueWall3Poses);
                 break;
-            case BlueWall6:
+         /*   case BlueWall6:
                 createPaths(BlueWall6Poses);
                 break;
             case BlueWall9:
@@ -25,10 +25,11 @@ public class Poses {
             case RedWall:
                 createPaths(RedWallPoses);
                 break;
+           */
             case RedWall3:
                 createPaths(RedWall3Poses);
                 break;
-            case RedWall6:
+        /*    case RedWall6:
                 createPaths(RedWall6Poses);
                 break;
             case RedWall9:
@@ -57,7 +58,7 @@ public class Poses {
                 break;
             case RedKey9:
                 createPaths(RedKey9Poses);
-
+*/
 
         }
     }
@@ -66,26 +67,25 @@ public class Poses {
     public PathPlus[] pathPlus;
     public PathChain[] PathChains;
     private PosePlus[] BlueWallPoses = new PosePlus[]{
-            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false),//starting pose
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(62, 120, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false), //score pose
-            new PosePlus(new Pose(60, 70, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false), //move off line
+            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false, null),//starting pose
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(62, 120, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 70, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null), //move off line
     } ;
     private PosePlus[] BlueWall3Poses = new PosePlus[]{
-            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false),//starting pose
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false), //move off line
+            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false, null),//starting pose
+            new PosePlus(new Pose(48, 96, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(55, 128, Math.toRadians(90)), false, null), //move off line
     } ;
-    private PosePlus[] BlueWall6Poses = new PosePlus[]{
+ /*   private PosePlus[] BlueWall6Poses = new PosePlus[]{
             new PosePlus(new Pose(18, 128, Math.toRadians(145)), false),//starting pose
             new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
             new PosePlus(new Pose(49, 81, Math.toRadians(0)), true),
@@ -119,12 +119,12 @@ public class Poses {
             new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false)//move off line
     } ;
-    private PosePlus[] RedWall3Poses = new PosePlus[]{
-            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false),//starting pose
-            new PosePlus(new Pose(100, 128, Math.toRadians(35)), false),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false)//move off line
+  */  private PosePlus[] RedWall3Poses = new PosePlus[]{
+            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false, null),//starting pose
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false, null)//move off line
     } ;
+  /*
     private PosePlus[] RedWall6Poses = new PosePlus[]{
             new PosePlus(new Pose(120, 128, Math.toRadians(35)), false),//starting pose
             new PosePlus(new Pose(100, 128, Math.toRadians(35)), false),
@@ -222,7 +222,7 @@ public class Poses {
             new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
             new PosePlus( new Pose(84, 40, Math.toRadians(90)), false) //move off line
     } ;
-
+*/
     private void createPaths(PosePlus[] poses){
         follower.setStartingPose(poses[0].pose);
 
@@ -232,10 +232,10 @@ public class Poses {
             if (i == 0){
                 startingPath = new Path(new BezierLine(poses[0].pose, poses[1].pose));
                 startingPath.setLinearHeadingInterpolation(poses[0].pose.getHeading(), poses[1].pose.getHeading());
-                pathPlus[i] = new PathPlus(startingPath, poses[i+1].continueDriving, null);
+                pathPlus[i] = new PathPlus(startingPath, poses[i+1].continueDriving, poses[i+1].nearShooting, null);
             }
             else {
-                pathPlus[i] = new PathPlus(null, poses[i+1].continueDriving, follower.pathBuilder().
+                pathPlus[i] = new PathPlus(null, poses[i+1].continueDriving, poses[i+1].nearShooting, follower.pathBuilder().
                         addPath(new BezierLine(poses[i].pose, poses[i+1].pose))
                         .setLinearHeadingInterpolation(poses[i].pose.getHeading(), poses[i+1].pose.getHeading(), 0.8)
                         .build());

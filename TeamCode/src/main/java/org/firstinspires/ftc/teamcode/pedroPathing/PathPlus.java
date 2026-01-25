@@ -8,9 +8,11 @@ public class PathPlus {
     public Path path;
     public boolean continueDriving;
     public PathChain pathChain;
-    public PathPlus(Path pathIn, boolean continueDrivingIn, PathChain pathChainIn) {
+    Boolean nearShooting;
+    public PathPlus(Path pathIn, boolean continueDrivingIn, Boolean nearShooting, PathChain pathChainIn) {
         path = pathIn;
         continueDriving = continueDrivingIn;
+        this.nearShooting = nearShooting;
         pathChain = pathChainIn;
     }
 }

@@ -4,8 +4,10 @@ import com.pedropathing.geometry.Pose;
 public class PosePlus {
   public Pose pose;
   public boolean continueDriving;
-  public PosePlus(Pose poseIn, boolean continueDrivingIn){
+  Boolean nearShooting;
+  public PosePlus(Pose poseIn, boolean continueDrivingIn, Boolean nearShooting){
       pose = poseIn;
       continueDriving = continueDrivingIn;
+      this.nearShooting = nearShooting;
   }
 }

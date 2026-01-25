@@ -34,11 +34,16 @@ public class AllAutoCode {
     HardwareMap hardwareMap;
     LinearOpMode linearOpMode;
     Telemetry telemetry;
+    AutoEnum autoEnum;
 
     public AllAutoCode (AutoEnum autoEnum, HardwareMap hardwareMap, LinearOpMode linearOpMode, Telemetry telemetry) {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = linearOpMode;
         this.telemetry = telemetry;
+        this.autoEnum = autoEnum;
+    }
+    public AllAutoCode() {
+
     }
 
     public void runOpMode() {
@@ -73,13 +78,13 @@ public class AllAutoCode {
         telemetry.addData("Status", "Initialized");
 
     follower = Constants.createFollower(hardwareMap);
+    poses = new Poses(autoEnum, follower);
     driveState = DriveEnum.StartDriving;
     shootingState = ShootEnum.Waiting;
     linearOpMode.waitForStart();
     shootingTimer = new ElapsedTime();
         fireServo.setPosition(0.5);
-
-        while(linearOpMode.opModeIsActive() && !linearOpMode.isStopRequested()){
+    while(linearOpMode.opModeIsActive() && !linearOpMode.isStopRequested()){
         drive();
         shoot();
         telemetry.addLine("Still in Loop");
@@ -136,8 +141,16 @@ public class AllAutoCode {
             case Waiting:
                 break;
             case Shooting:
-                firearmMotor.setVelocity(calcVelocity(4750));
-                firearmMotor1.setVelocity(calcVelocity(4750));
+                if (poses.pathPlus[driveIndex].nearShooting != null){
+                    if (poses.pathPlus[driveIndex].nearShooting = true){
+                        firearmMotor.setVelocity(calcVelocity(3750));
+                        firearmMotor1.setVelocity(calcVelocity(3750));
+                    }
+                    else {
+                        firearmMotor.setVelocity(calcVelocity(4750));
+                        firearmMotor1.setVelocity(calcVelocity(4750));
+                    }
+                }
                 shootingState = ShootEnum.SpinUp;
                 shootingTimer.reset();
                 break;
