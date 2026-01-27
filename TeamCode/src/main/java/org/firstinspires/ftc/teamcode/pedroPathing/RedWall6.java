@@ -7,10 +7,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 public class RedWall6 extends LinearOpMode {
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedWall6, hardwareMap, this, telemetry);
-
     @Override
     public void runOpMode() {
+        AllAutoCode paths = new AllAutoCode(AutoEnum.RedWall6, hardwareMap, this, telemetry);paths.runOpMode();
         paths.runOpMode();
     }
 }

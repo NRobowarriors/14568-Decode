@@ -10,10 +10,9 @@ import org.firstinspires.ftc.teamcode.pedroPathing.AutoEnum;
 
 public class BlueKey extends LinearOpMode {
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.BlueKey, hardwareMap, this, telemetry);
-
     @Override
     public void runOpMode() {
+        AllAutoCode paths = new AllAutoCode(AutoEnum.BlueKey, hardwareMap, this, telemetry);
         paths.runOpMode();
     }
 }

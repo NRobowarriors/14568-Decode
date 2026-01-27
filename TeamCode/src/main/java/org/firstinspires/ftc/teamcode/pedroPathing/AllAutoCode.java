@@ -141,14 +141,14 @@ public class AllAutoCode {
             case Waiting:
                 break;
             case Shooting:
-                if (poses.pathPlus[driveIndex].nearShooting != null){
-                    if (poses.pathPlus[driveIndex].nearShooting = true){
-                        firearmMotor.setVelocity(calcVelocity(3750));
-                        firearmMotor1.setVelocity(calcVelocity(3750));
+                if (poses.pathPlus[driveIndex-1].nearShooting != null){
+                    if (poses.pathPlus[driveIndex-1].nearShooting == true){
+                        firearmMotor.setVelocity(calcVelocity(3500));
+                        firearmMotor1.setVelocity(calcVelocity(3500));
                     }
                     else {
-                        firearmMotor.setVelocity(calcVelocity(4750));
-                        firearmMotor1.setVelocity(calcVelocity(4750));
+                        firearmMotor.setVelocity(calcVelocity(4250));
+                        firearmMotor1.setVelocity(calcVelocity(4250));
                     }
                 }
                 shootingState = ShootEnum.SpinUp;

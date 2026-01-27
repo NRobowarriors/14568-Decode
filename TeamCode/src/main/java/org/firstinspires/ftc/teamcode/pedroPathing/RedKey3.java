@@ -10,10 +10,9 @@ import org.firstinspires.ftc.teamcode.pedroPathing.AutoEnum;
 
 public class RedKey3 extends LinearOpMode {
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey3, hardwareMap, this, telemetry);
-
     @Override
     public void runOpMode() {
+        AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey3, hardwareMap, this, telemetry);
         paths.runOpMode();
     }
 }

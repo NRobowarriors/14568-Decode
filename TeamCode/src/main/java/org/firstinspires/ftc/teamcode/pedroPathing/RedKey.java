@@ -27,10 +27,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class RedKey extends LinearOpMode{
 
-    private AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey, hardwareMap, this, telemetry);
-
     @Override
     public void runOpMode() {
+        AllAutoCode paths = new AllAutoCode(AutoEnum.RedKey, hardwareMap, this, telemetry);
         paths.runOpMode();
     }
 }

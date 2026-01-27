@@ -16,7 +16,7 @@ public class Poses {
             case BlueWall3:
                 createPaths(BlueWall3Poses);
                 break;
-         /*   case BlueWall6:
+            case BlueWall6:
                 createPaths(BlueWall6Poses);
                 break;
             case BlueWall9:
@@ -25,11 +25,11 @@ public class Poses {
             case RedWall:
                 createPaths(RedWallPoses);
                 break;
-           */
+
             case RedWall3:
                 createPaths(RedWall3Poses);
                 break;
-        /*    case RedWall6:
+            case RedWall6:
                 createPaths(RedWall6Poses);
                 break;
             case RedWall9:
@@ -58,7 +58,7 @@ public class Poses {
                 break;
             case RedKey9:
                 createPaths(RedKey9Poses);
-*/
+
 
         }
     }
@@ -85,144 +85,141 @@ public class Poses {
             new PosePlus(new Pose(48, 96, Math.toRadians(135)), false, true),//scoring pose
             new PosePlus(new Pose(55, 128, Math.toRadians(90)), false, null), //move off line
     } ;
- /*   private PosePlus[] BlueWall6Poses = new PosePlus[]{
-            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false),//starting pose
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false), //move off line
+    private PosePlus[] BlueWall6Poses = new PosePlus[]{
+            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false, null),//starting pose
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null), //move off line
     } ;
     private PosePlus[] BlueWall9Poses = new PosePlus[]{
-            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false),//starting pose
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(62, 120, Math.toRadians(135)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false), //move off line
+            new PosePlus(new Pose(18, 128, Math.toRadians(145)), false, null),//starting pose
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 90, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(62, 120, Math.toRadians(135)), false, true),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null), //move off line
     } ;
     private PosePlus[] RedWallPoses = new PosePlus[]{
-            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false),//starting pose
-            new PosePlus(new Pose(100, 128, Math.toRadians(35)), false),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 59, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 61, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 35, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 37, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-           new PosePlus(new Pose(90, 120, Math.toRadians(90)), false)//move off line
+            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false, null),//starting pose
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 59, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 61, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 35, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 37, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+           new PosePlus(new Pose(90, 120, Math.toRadians(90)), false, null)//move off line
     } ;
-  */  private PosePlus[] RedWall3Poses = new PosePlus[]{
+    private PosePlus[] RedWall3Poses = new PosePlus[]{
             new PosePlus(new Pose(120, 128, Math.toRadians(35)), false, null),//starting pose
             new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
             new PosePlus(new Pose(90, 120, Math.toRadians(90)), false, null)//move off line
     } ;
-  /*
+
     private PosePlus[] RedWall6Poses = new PosePlus[]{
-            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false),//starting pose
-            new PosePlus(new Pose(100, 128, Math.toRadians(35)), false),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false)//move off line
+            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false, null),//starting pose
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false, null)//move off line
     } ;
     private PosePlus[] RedWall9Poses = new PosePlus[]{
-            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false),//starting pose
-            new PosePlus(new Pose(100, 128, Math.toRadians(35)), false),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(120, 59, Math.toRadians(180)), true),
-            new PosePlus(new Pose(132, 61, Math.toRadians(180)), true),
-            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false),//scoring pose
-            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false)//move off line
+            new PosePlus(new Pose(120, 128, Math.toRadians(35)), false, null),//starting pose
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 83, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 85, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(120, 59, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(132, 61, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(78, 80, Math.toRadians(45)), false, true),//scoring pose
+            new PosePlus(new Pose(90, 120, Math.toRadians(90)), false, null)//move off line
     } ;
     private PosePlus[] BlueKeyPoses = new PosePlus[]{
-            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false), //starting pose
-            new PosePlus(new Pose(60, 12, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(18, 81, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false, null), //starting pose
+            new PosePlus(new Pose(60, 10, Math.toRadians(118)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(5, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 11, Math.toRadians(120)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(8, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 11, Math.toRadians(121)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(13, 81, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 11, Math.toRadians(122)), false, false),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] BlueKey3Poses = new PosePlus[]{
-            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false), //starting pose
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false, null), //starting pose
+            new PosePlus(new Pose(60, 10, Math.toRadians(118)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true, null),
     } ;
     private PosePlus[] BlueKey6Poses = new PosePlus[]{
-            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false), //starting pose
-            new PosePlus(new Pose(60, 12, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false, null), //starting pose
+            new PosePlus(new Pose(60, 12, Math.toRadians(115)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false, false),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] BlueKey9Poses = new PosePlus[]{
-            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false), //starting pose
-            new PosePlus(new Pose(60, 12, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true),
-            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false),//scoring pose
-            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(60, 9, Math.toRadians(90)), false, null), //starting pose
+            new PosePlus(new Pose(60, 12, Math.toRadians(115)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(10, 33, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false, false),//scoring pose
+            new PosePlus(new Pose(49, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(12, 57, Math.toRadians(0)), true, null),
+            new PosePlus(new Pose(60, 10, Math.toRadians(115)), false, false),//scoring pose
+            new PosePlus(new Pose(55, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] RedKeyPoses = new PosePlus[]{
-            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false),//starting pose
-            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true),
-            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 63, Math.toRadians(180)), true),
-            new PosePlus( new Pose(130, 65, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 87, Math.toRadians(180)), true),
-            new PosePlus( new Pose(120, 85, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false, null),//starting pose
+            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 63, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(130, 65, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 87, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(120, 85, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] RedKey3Poses = new PosePlus[]{
-            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false),//starting pose
-            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false, null),//starting pose
+            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] RedKey6Poses = new PosePlus[]{
-            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false),//starting pose
-            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true),
-            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false, null),//starting pose
+            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false, null) //move off line
     } ;
     private PosePlus[] RedKey9Poses = new PosePlus[]{
-            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false),//starting pose
-            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true),
-            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(95, 63, Math.toRadians(180)), true),
-            new PosePlus( new Pose(130, 65, Math.toRadians(180)), true),
-            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false),//scoring pose
-            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false) //move off line
+            new PosePlus(new Pose(84, 9, Math.toRadians(90)), false, null),//starting pose
+            new PosePlus(new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 39, Math.toRadians(180)), true, null),
+            new PosePlus(new Pose(129, 41, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(95, 63, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(130, 65, Math.toRadians(180)), true, null),
+            new PosePlus( new Pose(84, 10, Math.toRadians(70)), false, false),//scoring pose
+            new PosePlus( new Pose(84, 40, Math.toRadians(90)), false, null) //move off line
     } ;
-*/
+
     private void createPaths(PosePlus[] poses){
         follower.setStartingPose(poses[0].pose);
 
