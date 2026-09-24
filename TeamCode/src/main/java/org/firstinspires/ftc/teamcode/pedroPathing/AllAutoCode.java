@@ -105,6 +105,10 @@ public class AllAutoCode {
                     follower.followPath(poses.pathPlus[driveIndex].path);
                     firstPath = false;
                 }
+                else if (driveIndex == poses.pathPlus.length){
+                    driveState = DriveEnum.Waiting;
+                    break;
+            }
                 else {
                     follower.followPath(poses.pathPlus[driveIndex].pathChain);
                 }
@@ -155,7 +159,7 @@ public class AllAutoCode {
                 shootingTimer.reset();
                 break;
             case SpinUp:
-                if (shootingTimer.seconds() > 0.4){
+                if (shootingTimer.seconds() > 0.8){
                     transfer1.setPower(1);
                     transfer2.setPower(1);
                     transfer3.setPower(1);
@@ -164,7 +168,7 @@ public class AllAutoCode {
                 }
                 break;
             case FlickerTimer:
-                if (shootingTimer.seconds() > 2.1) {
+                if (shootingTimer.seconds() > 2.5) {
                     shootingState = ShootEnum.Flicker;
                 }
                 break;

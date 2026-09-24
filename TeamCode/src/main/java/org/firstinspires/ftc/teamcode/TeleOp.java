@@ -136,8 +136,8 @@ public class TeleOp extends OpMode {
     public void loop() {
 
         if (gamepad2.left_bumper) {
-            firearmMotor.setVelocity(calcVelocity(3750));
-            firearmMotor1.setVelocity(calcVelocity(3750));
+            firearmMotor.setVelocity(calcVelocity(3250));
+            firearmMotor1.setVelocity(calcVelocity(3250));
         }
         else if (gamepad2.x) {
                 firearmMotor.setVelocity(calcVelocity(4400));

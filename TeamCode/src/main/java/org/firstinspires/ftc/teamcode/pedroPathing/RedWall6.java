@@ -9,7 +9,7 @@ public class RedWall6 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        AllAutoCode paths = new AllAutoCode(AutoEnum.RedWall6, hardwareMap, this, telemetry);paths.runOpMode();
+        AllAutoCode paths = new AllAutoCode(AutoEnum.RedWall6, hardwareMap, this, telemetry);
         paths.runOpMode();
     }
 }
